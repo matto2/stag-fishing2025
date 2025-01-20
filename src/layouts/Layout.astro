@@ -1,22 +1,29 @@
+---
+import "../styles/main.css";
+import Footer from "../components/Footer.astro";
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>My Template</title>
+  </head>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+  <body class="bg-brand-primary">
+    <div class="max-w-7xl mx-auto bg-red-600">
+      <div class="flex flex-col min-h-screen">
+        <!-- Main Content -->
+        <main class="flex-grow p-4">
+          <h2></h2>
+          <slot />
+        </main>
+      </div>
+    </div>
+    <Footer />
+    <script src="/src/scripts/fslightbox.js"></script>
+  </body>
+</html>
