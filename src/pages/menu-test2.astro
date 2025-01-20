@@ -1,0 +1,60 @@
+---
+import menu from "../config/menu.json";
+
+const pathname = Astro.url.pathname;
+
+export interface NavigationLink {
+  name: string;
+  url: string;
+}
+
+const { main }: { main: NavigationLink[] } = menu;
+---
+
+<header class="header">
+  <nav class="container mx-auto flex items-center justify-between p-4">
+    <!-- Logo -->
+    <div>
+      <a href="/" class="text-lg font-bold">Logo</a>
+    </div>
+
+    <!-- Navbar toggler (mobile) -->
+    <input id="nav-toggle" type="checkbox" class="hidden" />
+    <label for="nav-toggle" class="cursor-pointer md:hidden">
+      <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+        <path
+          fill-rule="evenodd"
+          d="M3 5h14M3 10h14M3 15h14"
+          clip-rule="evenodd"></path>
+      </svg>
+    </label>
+
+    <!-- Menu -->
+    <ul
+      id="nav-menu"
+      class="hidden flex-col space-y-4 md:flex md:flex-row md:space-x-6 md:space-y-0 md:items-center"
+    >
+      {
+        main.map((item) => (
+          <li>
+            <a
+              href={item.url}
+              class={`block text-gray-800 hover:text-blue-600 ${
+                pathname === item.url && "font-semibold text-blue-600"
+              }`}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Mobile menu toggle -->
+    <style>
+      #nav-toggle:checked + #nav-menu {
+        display: flex;
+      }
+    </style>
+  </nav>
+</header>

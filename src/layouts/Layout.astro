@@ -1,5 +1,6 @@
 ---
 import "../styles/main.css";
+import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 ---
 
@@ -7,23 +8,73 @@ import Footer from "../components/Footer.astro";
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>My Template</title>
   </head>
 
-  <body class="bg-brand-primary">
-    <div class="max-w-7xl mx-auto bg-red-600">
+  <body class="bg-white">
+    <div class="max-w-7xl mx-auto">
       <div class="flex flex-col min-h-screen">
         <!-- Main Content -->
         <main class="flex-grow p-4">
-          <h2></h2>
-          <slot />
+          <Header />
+
+          <!-- Mobile Menu Button -->
+          <div class="md:hidden p-4">
+            <button
+              id="menuToggle"
+              class="bg-blue-500 text-white py-2 px-4 rounded-md focus:outline-none flex items-center justify-center"
+              aria-expanded="false"
+              aria-controls="sideNav"
+            >
+              <span id="menuText">Menu</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- Side Navigation -->
+            <div
+              id="sideNav"
+              class="hidden md:block md:col-span-1 bg-red-400 p-4 transition-transform duration-300 ease-in-out"
+            >
+              <!-- Side Nav Content -->
+              <nav>
+                <ul>
+                  <li><a href="/" class="block py-2 text-white">Link 1</a></li>
+                  <li>
+                    <a href="/about" class="block py-2 text-white">Link 2</a>
+                  </li>
+                  <li><a href="#" class="block py-2 text-white">Link 3</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-span-1 md:col-span-3 bg-green-400">
+              <slot />
+            </div>
+          </div>
         </main>
       </div>
     </div>
     <Footer />
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const sideNav = document.getElementById("sideNav");
+      const menuText = document.getElementById("menuText");
+
+      menuToggle.addEventListener("click", () => {
+        const isHidden = sideNav.classList.contains("hidden");
+        sideNav.classList.toggle("hidden", !isHidden);
+        sideNav.classList.toggle("block", isHidden);
+        menuToggle.setAttribute("aria-expanded", isHidden.toString());
+        // Update button text/icon
+        menuText.textContent = isHidden ? "Close ✖" : "Menu";
+      });
+    </script>
     <script src="/src/scripts/fslightbox.js"></script>
+    <!-- <script src="/src/scripts/menu2.js"></script> -->
   </body>
 </html>

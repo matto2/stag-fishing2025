@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+let isMenuOpen = false;
+
+function toggleMenu() {
+  isMenuOpen = !isMenuOpen;
+}
+---
+
+<Layout>
+  <header class="bg-gray-800 text-white">
+    <div class="md:hidden flex justify-between items-center p-4">
+      <div class="text-lg font-bold">MySite</div>
+      <button
+        class="focus:outline-none"
+        on:click={toggleMenu}
+        aria-label="Toggle menu"
+      >
+        <svg
+          class="h-6 w-6"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+
+    <nav
+      class={`fixed md:relative inset-y-0 left-0 w-64 bg-gray-900 transform ${
+        isMenuOpen ? "translate-x-0" : "-translate-x-full"
+      } md:translate-x-0 md:transform-none transition-duration-300 ease-in-out`}
+    >
+      <ul class="flex flex-col p-4 space-y-2">
+        <li><a href="#" class="block py-2 px-4 hover:bg-gray-700">Home</a></li>
+        <li><a href="#" class="block py-2 px-4 hover:bg-gray-700">About</a></li>
+        <li>
+          <a href="#" class="block py-2 px-4 hover:bg-gray-700">Services</a>
+        </li>
+        <li>
+          <a href="#" class="block py-2 px-4 hover:bg-gray-700">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div
+      class={`fixed inset-0 bg-black bg-opacity-50 ${
+        isMenuOpen ? "block" : "hidden"
+      } md:hidden`}
+      on:click={toggleMenu}
+    >
+    </div>
+  </header>
+</Layout>
+
+<script>
+  // This script is now necessary for the component to be interactive
+</script>
