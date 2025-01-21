@@ -1,0 +1,52 @@
+---
+const { currentPage } = Astro.props; // Pass the current page as a prop
+const navItems = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Contact", href: "/contact" },
+];
+---
+
+<div
+  id="sideNav"
+  class="hidden md:block md:col-span-1 p-4 transition-transform duration-300 ease-in-out"
+>
+  <nav class="text-text-dark md:pt-0 pt-0 pb-8 md:pb-0">
+    <ul class="space-y-2">
+      <!-- Adds vertical spacing between list items -->
+      {
+        navItems.map(({ name, href }) => (
+          <li>
+            <a
+              href={href}
+              class={`block py-2 ${
+                currentPage === name.toLowerCase()
+                  ? "font-bold text-text-dark border-b-2 border-text-dark"
+                  : "hover:text-rose-500"
+              }`}
+            >
+              {name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</div>
+
+<!-- <div
+    id="sideNav"
+    class="hidden md:block md:col-span-1p-4 transition-transform duration-300 ease-in-out"
+  >
+    <nav>
+      <ul>
+        <li><a href="/" class="block py-2 text-white">Link 1</a></li>
+        <li>
+          <a href="/about" class="block py-2 text-white">Link 2</a>
+        </li>
+        <li><a href="#" class="block py-2 text-white">Link 3</a></li>
+      </ul>
+    </nav>
+  </div>
+</div> -->
