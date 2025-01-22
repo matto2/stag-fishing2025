@@ -3,8 +3,20 @@ import { Image } from "astro:assets";
 import logo from "../assets/stag-logo.svg";
 ---
 
-<div class="flex justify-center items-center sm:mb-4">
-  <a href="/">
-    <Image src={logo} alt="logo" class="w-auto h-16 md:h-32 sm:h-24 block" />
+<div class="relative flex justify-center items-center sm:mb-4">
+  <a href="/" class="relative">
+    <!-- Logo Image -->
+    <Image
+      src={logo}
+      alt="Stagnaro Sport Fishing, Charters, and Whale Watching Cruises"
+      class="w-auto h-16 md:h-32 sm:h-24 block"
+    />
+
+    <!-- Always Selectable Text -->
+    <span
+      class="absolute inset-0 flex justify-center items-center text-transparent [text-shadow:none]"
+    >
+      Stagnaro Sport Fishing, Charters, and Whale Watching Cruises
+    </span>
   </a>
 </div>
